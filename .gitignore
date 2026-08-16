@@ -1,0 +1,6 @@
+bin/
+coverage.out
+*.agekey
+*.key
+*.pem
+state/

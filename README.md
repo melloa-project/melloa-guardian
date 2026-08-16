@@ -6,6 +6,14 @@ The Guardian is deliberately separate from the main Melloa runtime. It owns host
 
 The authoritative architecture is currently maintained in [`melloa-project/melloa`](https://github.com/melloa-project/melloa), especially ADR-008, the control-plane specification, the security model, and the v0.2 decision record.
 
-## Initial repository state
+## M0 implementation
 
-This repository intentionally begins with only its trust boundary and contribution rules. Implement the Guardian after the main repository has defined and tested the narrow Guardian protocol and fake adapter. Keep deployment credentials and owner recovery material outside the main Melloa repository.
+The main repository now defines the narrow Guardian protocol and a fake read-only adapter. This repository implements the independently controlled side of protocol version `1.0.0`:
+
+- all six required modes and a deterministic state machine;
+- Ed25519-signed read-only status consumed by Melloa;
+- chained, append-only transition receipts;
+- atomic status projection with journal reconciliation;
+- strict private-key permissions and no model or Melloa dependency.
+
+See [`docs/PROTOCOL.md`](docs/PROTOCOL.md) and [`docs/OPERATIONS.md`](docs/OPERATIONS.md). Host-specific workload, firewall, credential-revocation, and owner-authentication wiring remains an owner-reviewed deployment operation; no deployment secret or personal topology belongs here.
