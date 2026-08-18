@@ -22,4 +22,10 @@ The Guardian provides the final owner-controlled boundary around the autonomous 
 5. Every transition produces an owner-visible receipt and an append-only audit record where available.
 6. Failure defaults to restricting autonomous side effects rather than silently restoring authority.
 
+## Non-goals for this repository
+
+- No owner deployment inventory, firewall interface name, service unit name, credential value, recovery key, or host-specific secret is committed here.
+- No API in this repository lets Melloa request a mode change or execute host control.
+- The disposable drill proves the signed protocol and state machine only; it is not a production Guardian installation.
+
 The exact protocol and implementation should remain small and be versioned against the contracts in the main repository.

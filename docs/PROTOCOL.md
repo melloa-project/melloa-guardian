@@ -20,6 +20,8 @@ SHA256("MELLOA-GUARDIAN-RECEIPT-V1\0" || payload || "\0" || signature || "\0" ||
 
 The append-only JSONL journal is authoritative. `status.json` is an atomic projection; `guardianctl status` reconciles it from the last valid journal record after an interrupted write.
 
+For operators: preserve the journal when investigating an incident. Replace or regenerate only disposable drill files. An owner-reviewed integration may expose the public key and `status.json` projection to Melloa read-only, but this repository does not choose the transport or host paths. It must not expose the journal, private key, lock file, or `guardianctl` command to Melloa.
+
 ## State machine
 
 Startup progresses `stopped → offline → read-only → no-actions → normal`. Restriction can move back through explicit safe transitions. `recovery` is entered only from `stopped` and exits only to `stopped`, preventing accidental restoration of ordinary authority.
